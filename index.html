@@ -49,6 +49,7 @@
     <p id="message">houdinix@icloud.com to contact developer and if interested in helping to spread more Bible projects from GotBible please donate to $preacher2954 on cashapp; the name Jack Sent should pop up. Thank you
     </p>
     <script>
+        let regex = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/;
         let verses = [];
 
         function fetchBibleVerses() {
@@ -57,7 +58,7 @@
                 .then(data => {
                     let lines = data.split('\n');
                     lines.forEach(line => {
-                        let parts = line.split(',');
+                        let parts = line.split(regex);
                         let verse = {
                             citation: parts[0],
                             text: parts[1]

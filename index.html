@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Got Bible?</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        #verse {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+<body>
+    <h1>Got Bible?</h1>
+    <h2>Get an ACTUAL "Random Verse"</h2>
+    <p>Press a button to be amazed at how it's actually random!</p>
+    
+    <p id="verse">Verse Will Be Displayed Here</p>
+    
+    <button onclick="fetchRandomVerse()">Get Verse</button>
+    
+    <script>
+        let verses = [];
+
+        function fetchBibleVerses() {
+            fetch('bible.csv')
+                .then(response => response.text())
+                .then(data => {
+                    let lines = data.split('\n');
+                    lines.forEach(line => {
+                        let parts = line.split(',');
+                        let verse = {
+                            citation: parts[0],
+                            text: parts[1]
+                        };
+                        verses.push(verse);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching Bible verses:', error);
+                });            
+        }
+
+        function fetchRandomVerse() {
+            if (verses.length === 0) {
+                fetchBibleVerses();
+            } else {
+                let randomIndex = Math.floor(Math.random() * 31102) + 1;
+                let randomVerse = verses[randomIndex - 1];
+                document.getElementById('verse').innerHTML = `<em>${randomVerse.citation}</em><br>${randomVerse.text}`;
+            }
+        }
+    </script>
+</body>
+</html>

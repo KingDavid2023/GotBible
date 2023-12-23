@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>YouTube Transcript GUI</title>
+  </head>
+  <body>
+    <!-- create the video ID entry field -->
+    <label>Enter YouTube video ID:</label>
+    <input id="video-id-entry" type="text"/>
+
+    <!-- create the language selection field -->
+    <label>Select language:</label>
+    <select id="language-menu">
+      <option value="en">en</option>
+      <option value="fr">fr</option>
+      <option value="de">de</option>
+      <option value="es">es</option>
+      <option value="it">it</option>
+      <option value="ja">ja</option>
+      <option value="ko">ko</option>
+      <option value="pt">pt</option>
+      <option value="ru">ru</option>
+      <option value="zh-cn">zh-cn</option>
+      <option value="zh-tw">zh-tw</option>
+    </select>
+
+    <!-- create the button to retrieve the transcript -->
+    <button id="transcript-button">Get Transcript</button>
+
+    <!-- create the label to display the transcript -->
+    <label id="transcript-label"></label>
+
+    <!-- include the youtube-transcript-api library -->
+    <script src="https://unpkg.com/youtube-transcript-api@1.2.0/lib/index.js"></script>
+
+    <!-- add a script to handle the transcript retrieval -->
+    <script>
+      function getTranscript() {
+        const videoId = document.getElementById('video-id-entry').value;
+        const language = document.getElementById('language-menu').value;
+
+        YouTubeTranscriptApi.listTranscripts(videoId).then(transcriptList => {
+          const transcript = transcriptList.findTranscript([language]);
+          transcript.fetch().then(transcriptText => {
+            let csv = 'start,duration,text\n';
+            transcriptText.forEach(line => {
+              csv += `${line['start']},${line['duration']},${line['text']}\n`;
+            });
+            // create a link to download the CSV file
+            const link = document.createElement('a');
+            link.download = 'transcript.csv';
+            link.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+            link.click();
+            document.getElementById('transcript-label').innerHTML = 'Transcript downloaded';
+          });
+        });
+      }
+
+      const transcriptButton = document.getElementById('transcript-button');
+      transcriptButton.addEventListener('click', getTranscript);
+    </script>
+  </body>
+</html>

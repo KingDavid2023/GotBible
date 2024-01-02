@@ -4,84 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Got Bible?</title>
-    
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-        }
-        h1, h2 {
-            color: #333;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        p {
-            margin-bottom: 20px;
-            color: #666;
-        }
-        #verse {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-        }
-    </style>
+   <head>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-    <h1>Got Bible?</h1>
-    <h2>Get an ACTUAL "Random Verse"</h2>
-    <p>Press a button to be amazed at how it's actually random!</p>
-    
-    <button onclick="fetchRandomVerse()">Get Verse</button>
-    
+    <h1><div>Got Bible?</div></h1>
+    <h2><div>An ACTUAL "Random Verse" Generator</div></h2>
+    <p>Press a button to get a random verse!</p>
+    <button id="mainButton">Get KJV Verse</button>
+    <button id="alternativeButton">Get ESV Verse</button>
     <p id="verse">Verse Will Be Displayed Here</p>
-
-    <p id="message">houdinix@icloud.com to contact developer and if interested in helping to spread more Bible projects from GotBible please donate to $preacher2954 on cashapp; the name Jack Sento should pop up. Thank you and God Bless.
-    </p>
-    <script>
-        window.onload = function() {
-        fetchRandomVerse(); }
-        let regex = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/;
-        let verses = [];
-
-        function fetchBibleVerses() {
-            fetch('bible.csv')
-                .then(response => response.text())
-                .then(data => {
-                    let lines = data.split('\n');
-                    lines.forEach(line => {
-                        let parts = line.split(regex);
-                        let verse = {
-                            citation: parts[0],
-                            text: parts[1]
-                        };
-                        verses.push(verse);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching Bible verses:', error);
-                });            
-        }
-
-        function fetchRandomVerse() {
-            if (verses.length === 0) {
-                fetchBibleVerses();
-            } else {
-                let randomIndex = Math.floor(Math.random() * 31102) + 1;
-                let randomVerse = verses[randomIndex - 1];
-                document.getElementById('verse').innerHTML = `<em>${randomVerse.citation}</em><br>${randomVerse.text}`;
-            }
-        }
-    </script>
+    <p id="message">Contact developer at houdinix@icloud.com. To support Bible projects, donate to $preacher2954 on Cashapp with the note "for Bible". Thank you and God Bless.</p>
+    <a href="about.html">How do I know it's "actually" random? [Click For More Info about the method or the site.]</a>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
+    <script src="GotBible.js"></script>
 </body>
 </html>

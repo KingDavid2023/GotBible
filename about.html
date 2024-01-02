@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Got Bible?</title>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+<body><p>I made this as a web app initially because all the other Random Verse Generators were either not clear about their method (how they got their "random" number, or if they were clear they didnt have open source code -- so no way for me to verify they werent just feeding me "feel good" verses.</p>
+  <p>If you want to view the source code for this project go to <a href="https://github.com/KingDavid2023/GotBible">this link</a> where you will find the github repository containing all the files to this website, but to make it easier for you the relevant portion is this explanation for the function I use to find a random verse:
+  <p>`Math.random()` in JavaScript produces pseudo-random numbers, not truly random ones. These numbers are generated using an algorithm and are considered "pseudo" because they are deterministic - given the same initial conditions, they will produce the same sequence of numbers. However, for most practical purposes, the randomness is sufficient, especially when used for applications like generating random numbers for games, simulations, or selecting items from an array as in the case of the `fetchRandomVerse` function. For cryptographic purposes or scenarios requiring high-security randomness, other methods beyond `Math.random()` are recommended.</p>
+  <p>Also if you check the source you will see that the 2 Bible files are stored locally so no need to wonder what versions etc. You can look yourself. I added ESV due to popular demand but will not be adding anymore for the time being. </p>
+  <p>I considered putting a limit on verse request but I dont want to limit how a person may use this tool so for now its unlimited random verses. That may change based on feedback.</p>
+  <p>If you have feature request, want to offer help, suggestions or feedback please write to the developer at houdinix@icloud.com</p>
+</body>

@@ -1,3 +1,6 @@
+window.onload = function() {
+    fetchKJVVerses();
+};
 let versesKJV = [];
         let esvBverses = [];
         function fetchKJVVerses() {

@@ -1,5 +1,8 @@
 window.onload = function() {
     fetchKJVVerses();
+    fetchESVVerses();
+    fetchRandomVerseKJV();
+    fetchRandomVerseESV();
 };
 let versesKJV = [];
         let esvBverses = [];
